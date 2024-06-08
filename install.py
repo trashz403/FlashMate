@@ -1,12 +1,19 @@
 import subprocess
 import sys
 
-DEFAULT_PACKAGES = ['psutil', 'wget']
+DEFAULT_PACKAGES = ['psutil', 'requests']
+
+def banner():
+    print ("███████╗██╗      █████╗ ███████╗██╗  ██╗███╗   ███╗ █████╗ ████████╗███████╗")
+    print ("██╔════╝██║     ██╔══██╗██╔════╝██║  ██║████╗ ████║██╔══██╗╚══██╔══╝██╔════╝")
+    print ("█████╗  ██║     ███████║███████╗███████║██╔████╔██║███████║   ██║   █████╗")
+    print ("██╔══╝  ██║     ██╔══██║╚════██║██╔══██║██║╚██╔╝██║██╔══██║   ██║   ██╔══╝")
+    print ("██║     ███████╗██║  ██║███████║██║  ██║██║ ╚═╝ ██║██║  ██║   ██║   ███████╗")
+    print ("╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝")
 
 def install_default_packages():
     installed_packages = []
     failed_packages = []
-
     try:
         for package in DEFAULT_PACKAGES:
             print(f"[+] Installing package: {package}")
@@ -32,4 +39,5 @@ def install_default_packages():
         print(f"[!] An error occurred while installing packages: {e}")
 
 if __name__ == "__main__":
+    banner()
     install_default_packages()
