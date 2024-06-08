@@ -1,7 +1,7 @@
 import subprocess
 import sys
 
-DEFAULT_PACKAGES = ['psutil', 'requests']
+DEFAULT_PACKAGES = ['psutil', 'wget']
 
 def banner():
     print (" +------------------------------------------------------------------------------+")
