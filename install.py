@@ -1,24 +1,35 @@
 import subprocess
 import sys
 
-def install_packages(requirements_file):
+DEFAULT_PACKAGES = ['psutil', 'wget']
+
+def install_default_packages():
+    installed_packages = []
+    failed_packages = []
+
     try:
-        with open(requirements_file, 'r') as file:
-            packages = file.readlines()
-        
-        for package in packages:
-            package = package.strip()
-            if package:
-                print(f"Installing package: {package}")
+        for package in DEFAULT_PACKAGES:
+            print(f"[+] Installing package: {package}")
+            try:
                 subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-        
-        print("All packages installed successfully.")
-    
-    except FileNotFoundError:
-        print(f"The file {requirements_file} does not exist.")
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred while installing packages: {e}")
+                installed_packages.append(package)
+            except subprocess.CalledProcessError:
+                failed_packages.append(package)
+
+        print("[+] Default packages installation summary:")
+        if installed_packages:
+            print("[+] Installed packages:")
+            for package in installed_packages:
+                print(f"  - {package}")
+        if failed_packages:
+            print("[+] Failed to install packages:")
+            for package in failed_packages:
+                print(f"  - {package}")
+        if not installed_packages and not failed_packages:
+            print("[+] No packages were installed.")
+
+    except Exception as e:
+        print(f"[!] An error occurred while installing packages: {e}")
 
 if __name__ == "__main__":
-    requirements_file = 'requirements.txt'
-    install_packages(requirements_file)
+    install_default_packages()
